@@ -1,0 +1,18 @@
+import random
+
+number = random.randint(1,50)
+guess = -1
+
+name = input("What is your name? ")
+        
+while guess != number:
+  question = input("Guess the number: ")
+  guess = int(question)
+
+  if guess > number:
+    print(str(guess) + " is too high " + str(name))  
+  elif guess < number:
+    print(str(guess) + " is too low " + str(name))  
+  else:
+    print("Congratulations " + str(name) )
+

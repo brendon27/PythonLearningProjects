@@ -1,0 +1,25 @@
+filepath = ('journal.txt')
+
+
+def writeFile(filepath, prompt):
+  with open(filepath, "w") as file:
+    file.write(prompt)
+    print("File has been created")
+
+
+prompt = input("What do you want to ask: \n")
+
+writeFile(filepath, prompt)
+
+
+def addEntry(filepath):
+  with open(filepath, 'a') as file:
+    file.write(words)
+  print(f"{words} has been added to {filepath} successfully")
+
+
+words = input("What do you want to add? \n")
+
+filepath = "journal.txt"
+addEntry(filepath)
+

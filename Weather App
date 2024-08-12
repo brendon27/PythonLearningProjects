@@ -1,0 +1,19 @@
+import requests
+
+BASE_URL = "http://api.weatherapi.com/v1/current.json?"
+API_KEY = "12b734608c454b0dad8133408240508"
+CITY = input("Enter your city: ")
+
+url = BASE_URL + "key=" + API_KEY + "&q=" + CITY
+response = requests.get(url).json()
+
+
+name = response['location']['name']
+celcius = response['current']['temp_c']
+fahrenheit = response['current']['temp_f']
+condition = response['current']['condition']['text']
+
+
+print(f"The name of the city is {name}")
+print(f"The weather is currently {celcius}ºC and {fahrenheit}ºF.")
+print(f"It feels {condition}")

@@ -1,0 +1,30 @@
+from bs4 import BeautifulSoup
+import requests
+
+# Fetch the Wikipedia page
+url = 'https://en.wikipedia.org/wiki/Billy_Kidman'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Extract and print the title
+title = soup.find('h1', {'id': 'firstHeading'}).text
+print(f"Title: {title}")
+
+# Extract and print the first paragraph
+first_paragraph = soup.find('p').text
+print(f"First Paragraph: {first_paragraph}")
+
+# Extract and print all headings and paragraphs
+for heading in soup.find_all(['h2', 'h3', 'h4']):
+    print(heading.text.strip())
+    next_node = heading.find_next_sibling()
+    while next_node and next_node.name != 'h2' and next_node.name != 'h3' and next_node.name != 'h4':
+        if next_node.name == 'p':
+            print(next_node.text.strip())
+        next_node = next_node.find_next_sibling()
+
+# Extract and print all links
+for link in soup.find_all('a', href=True):
+    href = link['href']
+    if href.startswith('/wiki/') and not href.startswith('/wiki/File:'):
+        print(f"Link text: {link.text}, URL: https://en.wikipedia.org{href}")
